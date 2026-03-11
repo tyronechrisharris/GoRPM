@@ -14,9 +14,22 @@ import json
 import logging
 import math
 import socketserver
+import subprocess
 import sys
 import threading
 import time
+
+try:
+    import gi
+    gi.require_version('Gst', '1.0')
+    gi.require_version('GstRtspServer', '1.0')
+    from gi.repository import Gst, GstRtspServer, GLib
+    Gst.init(None)
+except ImportError:
+    print("Warning: gi module not found. Make sure python3-gi, gir1.2-gst-rtsp-server-1.0, and GStreamer are installed.")
+    print("If running in a virtualenv, you may need to append the system site-packages to sys.path, e.g. sys.path.append('/usr/lib/python3/dist-packages')")
+    sys.exit(1)
+
 from dataclasses import asdict, dataclass, field
 from datetime import datetime
 from enum import Enum
@@ -306,6 +319,80 @@ class TCPHandler(socketserver.BaseRequestHandler):
         finally:
             self.server.remove_client(self)
             self.server.log(f"Client disconnected: {self.client_address}")
+
+class RTSPServer(Component):
+    """An RTSP server that streams a microsecond clock and an occupancy text overlay."""
+    def __init__(self, port: str = "8554"):
+        super().__init__(f"RTSPServer-{port}")
+        self.port = port
+        self.server = GstRtspServer.RTSPServer()
+        self.server.set_service(self.port)
+        self.factory = GstRtspServer.RTSPMediaFactory()
+
+        # Pipeline: Black background, clock overlay with microseconds, text overlay for "Occupied"
+        # We omit parentheses as it might cause syntax issues in launch string
+        pipeline = (
+            "videotestsrc pattern=black ! "
+            "video/x-raw,width=640,height=480,framerate=15/1 ! "
+            "clockoverlay time-format=\"%H:%M:%S.%%06u\" ! "
+            "textoverlay name=occupancy_text text=\"\" valignment=bottom halignment=center font-desc=\"Sans, 48\" ! "
+            "x264enc speed-preset=ultrafast tune=zerolatency ! "
+            "rtph264pay name=pay0 pt=96"
+        )
+        self.factory.set_launch(pipeline)
+        self.factory.set_shared(True)
+        self.server.get_mount_points().add_factory("/camera", self.factory)
+
+        # Connect to media-configure to get the textoverlay element when a client connects
+        self.factory.connect("media-configure", self._on_media_configure)
+        self.text_overlay = None
+
+        self._server_thread = None
+        self._running = False
+
+    def _on_media_configure(self, factory, media):
+        pipeline = media.get_element()
+        self.text_overlay = pipeline.get_by_name("occupancy_text")
+
+        # When media is unconfigured, clear the reference to avoid segfaults
+        media.connect("unprepared", self._on_media_unprepared)
+
+    def _on_media_unprepared(self, media):
+        self.text_overlay = None
+
+    def start(self):
+        if self._running:
+            return
+        self.log(f"Starting RTSP server on rtsp://127.0.0.1:{self.port}/camera")
+
+        self.context = GLib.MainContext.new()
+        self.loop = GLib.MainLoop(self.context)
+        self.server.attach(self.context)
+        self._running = True
+
+        def run_loop():
+            self.context.push_thread_default()
+            self.loop.run()
+            self.context.pop_thread_default()
+
+        self._server_thread = threading.Thread(target=run_loop, name=f"RTSP-{self.port}")
+        self._server_thread.daemon = True
+        self._server_thread.start()
+
+    def stop(self):
+        if not self._running:
+            return
+        self.log(f"Stopping RTSP server on port {self.port}")
+        self._running = False
+        self.loop.quit()
+        if self._server_thread:
+            self._server_thread.join()
+
+    def set_occupied(self, is_occupied: bool):
+        if self.text_overlay:
+            text = "Occupied" if is_occupied else ""
+            self.text_overlay.set_property("text", text)
+
 
 class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer, Component):
     """A threaded TCP server that can manage clients."""
@@ -623,6 +710,10 @@ class LaneSimulator(Component):
         self.is_enabled = settings.Enabled
         self.rpm = RPMSimulator(f"{self.name}-RPM", settings, self)
         self.is_in_auto_mode = False
+        # If there are multiple lanes, we should still use distinct ports,
+        # but try to ensure the first lane gets 8554.
+        port_num = 8554 if self.settings.LaneID == 1 else 8554 + self.settings.LaneID - 1
+        self.rtsp_server = RTSPServer(port=str(port_num))
         
         self.log(f"Lane '{self.name}' initialized.")
 
@@ -630,6 +721,7 @@ class LaneSimulator(Component):
         if self.is_enabled:
             self.log("Starting lane...")
             self.rpm.start()
+            self.rtsp_server.start()
             self.settings.Status = "running"
         else:
             self.log("Lane is disabled, not starting.")
@@ -638,12 +730,14 @@ class LaneSimulator(Component):
     def stop(self):
         self.log("Stopping lane...")
         self.rpm.stop()
+        self.rtsp_server.stop()
         self.settings.Status = "stopped"
 
     def poll_status(self):
         """Updates the status attributes of the lane."""
         self.settings.OccupancyState = self.rpm.occupancy_state
         self.settings.ClientCount = self.rpm.client_count
+        self.rtsp_server.set_occupied(self.rpm.occupancy_state != "unoccupied")
 
     def set_auto_mode(self, auto_on: bool):
         if self.is_enabled:

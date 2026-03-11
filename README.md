@@ -23,15 +23,23 @@ The primary purpose is to provide a configurable and realistic source of RPM dat
 * Required Python libraries:
     * `numpy`
     * `scipy`
+    * `PyGObject` (provided by `python3-gi`)
+* Required System packages:
+    * GStreamer 1.0, plugins (`gstreamer1.0-plugins-base-apps`, `gstreamer1.0-x`), and RTSP server (`gir1.2-gst-rtsp-server-1.0`)
 
 ## 4. Installation
 
 1.  **Save the Script**: Place the `rpm_simulator.py` script in a directory.
 
-2.  **Install Dependencies**: Open a terminal or command prompt and install the required libraries using `pip`.
+2.  **Install Dependencies**: Open a terminal or command prompt and install the required libraries.
+
+    On Ubuntu/Debian:
     ```bash
+    sudo apt-get update
+    sudo apt-get install -y python3-gi gir1.2-gst-rtsp-server-1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-base-apps gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav gstreamer1.0-x
     pip install numpy scipy
     ```
+    *(Note: If you use a virtualenv, you may need to append `/usr/lib/python3/dist-packages` to your `PYTHONPATH` so it can find the system `gi` module).*
 
 ## 5. Configuration
 
