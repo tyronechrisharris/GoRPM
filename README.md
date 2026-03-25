@@ -1,165 +1,68 @@
-# Python Radiation Portal Monitor (RPM) Simulator
+# Go Radiation Portal Monitor (RPM) Simulator
 
 ## 1. Overview
 
-This project is a command-line-based Radiation Portal Monitor (RPM) simulator, converted from the original TypeScript project developed by Sandia National Laboratories. The program simulates the data streams from one or multiple RPMs, each operating in its own "lane."
+This project is a high-performance, single-executable Go application that simulates one or multiple Radiation Portal Monitors (RPMs). It is a full migration of the previous Python-based `PyRPM` project. By leveraging Pure Go libraries, it eliminates all external dependencies (such as Python runtimes, C libraries, and GStreamer), simplifying deployment on field hardware.
 
-The primary purpose is to provide a configurable and realistic source of RPM data for testing, development, and integration of monitoring systems without the need for physical hardware. The simulator runs continuously, generating a mix of background radiation data and random vehicle occupancies, which may include gamma, neutron, or combined alarms based on statistical probabilities.
+The simulator runs continuously and independently in one or more "lanes," procedurally generating radiation profiles for background counts and simulated vehicle occupancies. It streams simulated detector data via TCP and broadcasts an MJPEG video overlay (simulating a camera feed) over RTSP.
 
 ## 2. Features
 
-* **Multi-Lane Simulation**: Run dozens of independent RPM simulators simultaneously, each representing a different lane.
-* **Configurable via JSON**: All simulation parameters are controlled through an external `settings.json` file, allowing for easy configuration without code changes.
-* **Realistic Data Generation**: Procedurally generates radiation profiles for vehicle occupancies using a Gaussian model to simulate the rise and fall of detector counts.
-* **TCP/IP Data Streaming**: Each simulated RPM lane listens on a dedicated TCP port, streaming data in a format compatible with real-world RPM systems.
-* **Automatic Occupancy Mode**: Automatically generates random vehicle occupancies at configurable intervals.
-* **Probabilistic Alarms**: The type of each occupancy (e.g., normal, gamma alarm, neutron alarm) is determined by user-defined probabilities.
-* **Live Console Monitoring**: Provides a clean, real-time status dashboard in the console, showing the state of each lane.
-* **File Logging**: Optionally logs all events and status changes to a file for later analysis.
+* **High Performance**: Rewritten entirely in idiomatic Go with lightweight Goroutines for concurrency.
+* **Pure Go RTSP Server**: Uses `gortsplib/v4` to stream MJPEG frames showing a microsecond clock and an "Occupied" overlay. No external GStreamer or OpenCV required.
+* **Single Binary**: Easily compiled into a single static binary for Linux, Windows, or macOS, completely removing the need for local package managers or interpreters on target machines.
+* **Configuration via JSON**: Controlled using a `settings.json` file.
+* **Realistic Data Generation**: Uses statistical probability to generate varied occupancies (Gamma, Neutron, Combined, or Normal).
 
-## 3. Requirements
+## 3. Quick Start
 
-* Python 3.7+
-* Required Python libraries:
-    * `numpy`
-    * `scipy`
+### 3.1. Using Pre-Compiled Binaries
 
-## 4. Installation
+Check the `dist` folder after running the build script, or grab the appropriate binary for your system:
 
-1.  **Save the Script**: Place the `rpm_simulator.py` script in a directory.
+| Platform | Architecture | Binary File |
+| :--- | :--- | :--- |
+| **Linux** | x64 (amd64) | `pyrpm-linux-x64` |
+| **Windows** | x64 (amd64) | `pyrpm-windows-x64.exe` |
+| **macOS** | Apple Silicon (arm64) | `pyrpm-macos-arm64` |
 
-2.  **Install Dependencies**: Open a terminal or command prompt and install the required libraries using `pip`.
-    ```bash
-    pip install numpy scipy
-    ```
+1. Create a `settings.json` file in the same directory as the executable (an example is included in the project).
+2. Run the executable from your terminal:
+   ```bash
+   ./pyrpm-linux-x64
+   ```
 
-## 5. Configuration
+### 3.2. Building from Source
 
-The entire simulation is controlled by a `settings.json` file located in the same directory as the script.
-
-### 5.1. `settings.json` Structure
-
-Here is an example configuration for two lanes. You can add as many lane objects to the `"Lanes"` list as needed.
-
-```json
-{
-    "Version": "1.0.0",
-    "LogLevel": "INFO",
-    "LogFilename": "rpm_simulator.log",
-    "Lanes": [
-        {
-            "LaneID": 1,
-            "LaneName": "Lane 1 (Local)",
-            "Enabled": true,
-            "AutoGammaProbability": 0.25,
-            "AutoNeutronProbability": 0.10,
-            "AutoInterval": 45,
-            "RPM": {
-                "IPAddr": "127.0.0.1",
-                "Port": 10001,
-                "GammaBG": 250,
-                "NeutronBG": 2,
-                "GammaNSigma": 6,
-                "NeutronThreshold": 5,
-                "GHThreshold": 450,
-                "GLThreshold": 80,
-                "NHThreshold": 10
-            }
-        },
-        {
-            "LaneID": 2,
-            "LaneName": "Lane 2 (Remote)",
-            "Enabled": true,
-            "AutoGammaProbability": 0.05,
-            "AutoNeutronProbability": 0.05,
-            "AutoInterval": 60,
-            "RPM": {
-                "IPAddr": "0.0.0.0",
-                "Port": 10002,
-                "GammaBG": 220,
-                "NeutronBG": 3,
-                "GammaNSigma": 5,
-                "NeutronThreshold": 6,
-                "GHThreshold": 400,
-                "GLThreshold": 100,
-                "NHThreshold": 12
-            }
-        }
-    ]
-}
-```
-
-### 5.2. Parameter Definitions
-
-#### Global Settings
-* `"LogLevel"`: The level of detail for console and file logs. Options: `"DEBUG"`, `"INFO"`, `"WARNING"`, `"ERROR"`.
-* `"LogFilename"`: The name of the file to write logs to. If set to `null` or an empty string, logs will only be written to the console.
-
-#### Lane Settings (`Lanes` array)
-Each object in the `"Lanes"` list defines one simulator instance.
-
-* `"LaneName"`: A descriptive name for the lane (e.g., "East Gate - Inbound").
-* `"Enabled"`: If `true`, this lane's simulator will start. If `false`, it will be ignored.
-* `"AutoInterval"`: The average time in **seconds** between the end of one occupancy and the start of the next.
-* `"AutoGammaProbability"`: The probability (from 0.0 to 1.0) that a generated occupancy will contain a gamma source.
-* `"AutoNeutronProbability"`: The probability (from 0.0 to 1.0) that a generated occupancy will contain a neutron source.
-
-#### RPM Settings (nested within each Lane)
-These parameters control the physics and data output of the RPM.
-
-* `"IPAddr"`: The IP address the RPM server will bind to. Use `"127.0.0.1"` for local access only, or `"0.0.0.0"` to allow connections from other computers on the network.
-* `"Port"`: The TCP port for the data stream. **Must be unique for each lane.**
-* `"GammaBG"`: The average 1-second background count rate for gamma detectors.
-* `"NeutronBG"`: The average 1-second background count rate for neutron detectors.
-* `"GammaNSigma"`: The number of standard deviations (N-Sigma) above background required to trigger a gamma alarm during an occupancy.
-* `"NeutronThreshold"`: The absolute counts-per-second required to trigger a neutron alarm.
-* `"GHThreshold"`: **G**amma **H**igh threshold. Triggers a `GH` background message if the count exceeds this value.
-* `"GLThreshold"`: **G**amma **L**ow threshold. Triggers a `GL` background message if the count falls below this value.
-* `"NHThreshold"`: **N**eutron **H**igh threshold. Triggers an `NH` background message if the count exceeds this value.
-
-## 6. How to Run
-
-1.  Ensure your `settings.json` file is configured and saved in the same directory as the script.
-2.  Run the simulator from your terminal:
-    ```bash
-    python rpm_simulator.py
-    ```
-3.  The program will start and display a status dashboard, which updates periodically.
-    ```
-    --- Sandia Radiation Portal Monitor (Python) ---
-    2025-06-09 23:30:00,123 - [MainThread  ] - INFO     - Logging configured with level INFO
-    ...
-    2025-06-09 23:30:00,456 - [Lane 1 (Local)] - INFO     - Starting lane...
-    2025-06-09 23:30:00,789 - [Lane 2 (Remote)] - INFO     - Starting lane...
-
-    ========================================
-    Status at 2025-06-09 23:30:15
-    ========================================
-      Lane: Lane 1 (Local)  | Status: running      | Clients: 0   | Occupancy: unoccupied
-      Lane: Lane 2 (Remote) | Status: running      | Clients: 0   | Occupancy: unoccupied
-    ========================================
-    (Press Ctrl+C to stop the simulator)
-    ```
-4.  To stop the simulator, press `Ctrl+C`. The program will perform a graceful shutdown of all running lanes.
-
-## 7. Connecting to the Data Stream
-
-You can connect to the raw TCP data stream of any running lane using a network utility like `netcat` (`nc`) or `telnet`.
-
-For example, to connect to **Lane 1** as configured above, use the following command:
+Ensure you have [Go](https://go.dev/doc/install) installed (version 1.20+ recommended).
 
 ```bash
-# On Linux or macOS
-nc 127.0.0.1 10001
+make build
+```
+This command generates the stripped binaries inside the `/dist` directory.
 
-# On Windows (using telnet)
-telnet 127.0.0.1 10001
+## 4. How It Works
+
+Upon starting, the application reads the `settings.json` file. For every lane configured and enabled, a new `Goroutine` sets up a dedicated TCP data server and an RTSP stream.
+
+### Connecting to Data
+Connect to a lane's raw TCP stream using a network utility:
+```bash
+# e.g., for Lane 1 on the default port
+nc 127.0.0.1 10001
 ```
 
-You will see the raw data messages (e.g., `GB`, `NB`, `GS`, `GA`) being printed to your terminal as they are generated by the simulator.
+### Viewing the Camera Stream
+Open VLC or a compatible RTSP client and connect to the lane's RTSP endpoint:
+```
+rtsp://127.0.0.1:8554/
+```
+*(Subsequent lanes increment the port number starting from 8554, based on LaneID)*
 
-## 8. Acknowledgments
+## 5. Third-Party Packages Used
 
-This program is a Python implementation of the original **SRLS (Simulated Radiation Location Sensor)** project created by **Sandia National Laboratories**.
+The following Pure Go libraries made this migration possible without CGO:
 
-* **Original Project**: [https://github.com/sandialabs/SRLS](https://github.com/sandialabs/SRLS)
+* **`github.com/bluenviron/gortsplib/v4`**: Used to implement the RTSP streaming server natively in Go.
+* **`github.com/spf13/viper`**: A robust configuration management tool for parsing and falling back to default values for `settings.json`.
+* **`golang.org/x/image/font` & `image/jpeg`**: Core Go libraries used to programmatically draw text and encode MJPEG frames directly in memory, eliminating the need for OpenCV/GStreamer.
