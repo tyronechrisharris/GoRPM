@@ -95,6 +95,8 @@ func (r *RPMSimulator) Stop() {
 }
 
 func (r *RPMSimulator) StartAutoMode() {
+	r.mux.Lock()
+	defer r.mux.Unlock()
 	if !r.autoModeActive {
 		r.autoNextOccTime = float64(time.Now().UnixNano()) / 1e9
 		r.autoModeActive = true
@@ -103,10 +105,18 @@ func (r *RPMSimulator) StartAutoMode() {
 }
 
 func (r *RPMSimulator) StopAutoMode() {
+	r.mux.Lock()
+	defer r.mux.Unlock()
 	if r.autoModeActive {
 		r.autoModeActive = false
 		log.Printf("[%s] Auto mode stopped", r.name)
 	}
+}
+
+func (r *RPMSimulator) AutoModeActive() bool {
+	r.mux.Lock()
+	defer r.mux.Unlock()
+	return r.autoModeActive
 }
 
 func (r *RPMSimulator) OccupancyState() string {
