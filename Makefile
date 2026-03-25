@@ -12,6 +12,8 @@ build:
 	GOOS=windows GOARCH=amd64 go build -ldflags="$(LDFLAGS)" -o $(DIST_DIR)/$(APP_NAME)-windows-x64.exe .
 	@echo "Building for Linux (amd64)..."
 	GOOS=linux GOARCH=amd64 go build -ldflags="$(LDFLAGS)" -o $(DIST_DIR)/$(APP_NAME)-linux-x64 .
+	@echo "Building for Linux (386)..."
+	GOOS=linux GOARCH=386 go build -ldflags="$(LDFLAGS)" -o $(DIST_DIR)/$(APP_NAME)-linux-x86 .
 
 clean:
 	rm -rf $(DIST_DIR)
