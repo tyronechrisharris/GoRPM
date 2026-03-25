@@ -57,7 +57,7 @@ func (l *LaneSimulator) Stop() {
 	}
 }
 
-func (l *LaneSimulator) PollStatus() (string, int, string) {
+func (l *LaneSimulator) PollStatus() (string, int, string, bool) {
 	status := "stopped"
 	if l.IsEnabled {
 		status = "running"
@@ -67,12 +67,17 @@ func (l *LaneSimulator) PollStatus() (string, int, string) {
 
 	clientCount := l.rpm.ClientCount()
 	occupancyState := l.rpm.OccupancyState()
+	autoMode := l.rpm.AutoModeActive()
 
 	if l.rtspServer != nil {
 		l.rtspServer.SetOccupied(occupancyState != "unoccupied")
 	}
 
-	return status, clientCount, occupancyState
+	return status, clientCount, occupancyState, autoMode
+}
+
+func (l *LaneSimulator) GetID() int {
+	return l.Settings.LaneID
 }
 
 func (l *LaneSimulator) SetAutoMode(autoOn bool) {

@@ -34,6 +34,7 @@ type AppSettings struct {
 	Version     string
 	LogLevel    string
 	LogFilename string
+	WebPort     int
 	Lanes       []LaneSettings
 }
 
@@ -52,6 +53,7 @@ func LoadConfig(path string) (*AppSettings, error) {
 			Version:     "1.0.0",
 			LogLevel:    "INFO",
 			LogFilename: "rpm_simulator.log",
+			WebPort:     8080,
 			Lanes: []LaneSettings{
 				{
 					LaneID: 1, LaneName: "Default Lane", Enabled: true,
@@ -70,6 +72,9 @@ func LoadConfig(path string) (*AppSettings, error) {
 		}
 		return settings, nil
 	}
+
+	// Default WebPort if not provided
+	viper.SetDefault("WebPort", 8080)
 
 	var settings AppSettings
 	if err := viper.Unmarshal(&settings); err != nil {

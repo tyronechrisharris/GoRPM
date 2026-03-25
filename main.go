@@ -8,6 +8,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/sandialabs/srls-go/internal/api"
 	"github.com/sandialabs/srls-go/internal/config"
 	"github.com/sandialabs/srls-go/internal/simulator"
 )
@@ -46,6 +47,8 @@ func main() {
 		lane.SetAutoMode(true)
 	}
 
+	go api.StartServer(cfg.WebPort, lanes)
+
 	sigs := make(chan os.Signal, 1)
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
 
@@ -67,9 +70,13 @@ func main() {
 			fmt.Printf("Status at %s\n", time.Now().Format("2006-01-02 15:04:05"))
 			fmt.Println("========================================")
 			for _, lane := range lanes {
-				status, clients, occupancy := lane.PollStatus()
-				fmt.Printf("  Lane: %-15s | Status: %-10s | Clients: %-3d | Occupancy: %-12s\n",
-					lane.Name, status, clients, occupancy)
+				status, clients, occupancy, autoMode := lane.PollStatus()
+				autoStr := "OFF"
+				if autoMode {
+					autoStr = "ON"
+				}
+				fmt.Printf("  Lane: %-15s | Status: %-10s | Clients: %-3d | Occupancy: %-12s | Auto: %-3s\n",
+					lane.Name, status, clients, occupancy, autoStr)
 			}
 			fmt.Println("========================================")
 			fmt.Println("(Press Ctrl+C to stop the simulator)")
