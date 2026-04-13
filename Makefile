@@ -1,6 +1,6 @@
 .PHONY: build clean
 
-APP_NAME := pyrpm
+APP_NAME := gorpm
 DIST_DIR := dist
 LDFLAGS := -s -w
 

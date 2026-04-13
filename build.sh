@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define binary name
-APP_NAME="pyrpm"
+APP_NAME="gorpm"
 DIST_DIR="dist"
 
 # Create dist directory

@@ -26,19 +26,19 @@ jobs:
       - name: Build macOS Apple Silicon (arm64)
         run: |
           mkdir -p dist
-          GOOS=darwin GOARCH=arm64 CGO_ENABLED=0 go build -ldflags="-s -w" -o dist/pyrpm-macos-arm64 .
+          GOOS=darwin GOARCH=arm64 CGO_ENABLED=0 go build -ldflags="-s -w" -o dist/gorpm-macos-arm64 .
 
       - name: Build Windows (amd64)
         run: |
-          GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build -ldflags="-s -w" -o dist/pyrpm-windows-x64.exe .
+          GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build -ldflags="-s -w" -o dist/gorpm-windows-x64.exe .
 
       - name: Build Linux (amd64)
         run: |
-          GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -ldflags="-s -w" -o dist/pyrpm-linux-x64 .
+          GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -ldflags="-s -w" -o dist/gorpm-linux-x64 .
 
       - name: Build Linux (386)
         run: |
-          GOOS=linux GOARCH=386 CGO_ENABLED=0 go build -ldflags="-s -w" -o dist/pyrpm-linux-x86 .
+          GOOS=linux GOARCH=386 CGO_ENABLED=0 go build -ldflags="-s -w" -o dist/gorpm-linux-x86 .
 
       - name: Generate Release Notes
         id: release_notes

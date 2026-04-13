@@ -12,13 +12,13 @@ If you want to compile PyRPM for a Raspberry Pi (or similar Linux-based ARM hard
 For example, to add `linux-arm`:
 ```bash
 echo "Building for Linux (arm32)..."
-GOOS=linux GOARCH=arm go build -ldflags="-s -w" -o "dist/pyrpm-linux-arm" .
+GOOS=linux GOARCH=arm go build -ldflags="-s -w" -o "dist/gorpm-linux-arm" .
 ```
 
 To add `linux-arm64` (e.g., Raspberry Pi 4 running 64-bit OS):
 ```bash
 echo "Building for Linux (arm64)..."
-GOOS=linux GOARCH=arm64 go build -ldflags="-s -w" -o "dist/pyrpm-linux-arm64" .
+GOOS=linux GOARCH=arm64 go build -ldflags="-s -w" -o "dist/gorpm-linux-arm64" .
 ```
 
 Make sure you do the same inside the `Makefile` under the `build` target so both build systems remain consistent.
