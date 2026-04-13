@@ -66,6 +66,10 @@ jobs:
             echo "title=Manual Release ($REF_NAME)" >> $GITHUB_OUTPUT
           fi
 
+      - name: Copy settings
+        run: |
+          cp settings.json dist/
+
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:

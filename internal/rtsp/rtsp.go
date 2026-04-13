@@ -101,19 +101,18 @@ func (s *Server) Start() error {
 		},
 	}
 
+	h := &serverHandler{}
 	s.server = &gortsplib.Server{
 		RTSPAddress: fmt.Sprintf(":%s", s.port),
-	}
-
-	s.stream = gortsplib.NewServerStream(s.server, desc)
-
-	s.server.Handler = &serverHandler{
-		stream: s.stream,
+		Handler:     h,
 	}
 
 	if err := s.server.Start(); err != nil {
 		return err
 	}
+
+	s.stream = gortsplib.NewServerStream(s.server, desc)
+	h.stream = s.stream
 
 	go s.runStream(mjpegFormat, desc.Medias[0])
 

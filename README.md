@@ -59,6 +59,13 @@ rtsp://127.0.0.1:8554/
 ```
 *(Subsequent lanes increment the port number starting from 8554, based on LaneID)*
 
+### Web UI
+The simulator also serves a Web UI to view the live status of the lanes and manually trigger simulated occupancies.
+Open your browser and navigate to:
+```
+http://127.0.0.1:8080/
+```
+
 ## 5. Third-Party Packages Used
 
 The following Pure Go libraries made this migration possible without CGO:
