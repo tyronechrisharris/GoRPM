@@ -59,10 +59,7 @@ func (s *Server) handleStatus(w http.ResponseWriter, r *http.Request) {
 	var statuses []LaneStatus
 	for _, lane := range s.lanes {
 		status, clients, occupancy, autoMode := lane.PollStatus()
-		videoPort := 8554
-		if lane.Settings.LaneID != 1 {
-			videoPort = 8554 + lane.Settings.LaneID - 1
-		}
+		videoPort := 8554 + lane.Settings.LaneID - 1
 		statuses = append(statuses, LaneStatus{
 			ID:        lane.GetID(),
 			Name:      lane.Name,
