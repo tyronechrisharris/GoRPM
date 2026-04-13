@@ -45,6 +45,9 @@ type LaneStatus struct {
 	Clients   int    `json:"clients"`
 	Occupancy string `json:"occupancy"`
 	AutoMode  bool   `json:"auto_mode"`
+	IPAddr    string `json:"ip_addr"`
+	RPMPort   int    `json:"rpm_port"`
+	VideoPort int    `json:"video_port"`
 }
 
 func (s *Server) handleStatus(w http.ResponseWriter, r *http.Request) {
@@ -56,6 +59,10 @@ func (s *Server) handleStatus(w http.ResponseWriter, r *http.Request) {
 	var statuses []LaneStatus
 	for _, lane := range s.lanes {
 		status, clients, occupancy, autoMode := lane.PollStatus()
+		videoPort := 8554
+		if lane.Settings.LaneID != 1 {
+			videoPort = 8554 + lane.Settings.LaneID - 1
+		}
 		statuses = append(statuses, LaneStatus{
 			ID:        lane.GetID(),
 			Name:      lane.Name,
@@ -63,6 +70,9 @@ func (s *Server) handleStatus(w http.ResponseWriter, r *http.Request) {
 			Clients:   clients,
 			Occupancy: occupancy,
 			AutoMode:  autoMode,
+			IPAddr:    lane.Settings.RPM.IPAddr,
+			RPMPort:   lane.Settings.RPM.Port,
+			VideoPort: videoPort,
 		})
 	}
 
@@ -154,6 +164,9 @@ var indexHTML = `
             <tr>
                 <th>Lane ID</th>
                 <th>Name</th>
+                <th>IP Address</th>
+                <th>RPM Port</th>
+                <th>Video Port</th>
                 <th>Status</th>
                 <th>Clients</th>
                 <th>Occupancy</th>
@@ -188,6 +201,9 @@ var indexHTML = `
 
                 tr.innerHTML = '<td>' + lane.id + '</td>' +
                     '<td>' + lane.name + '</td>' +
+                    '<td>' + lane.ip_addr + '</td>' +
+                    '<td>' + lane.rpm_port + '</td>' +
+                    '<td>' + lane.video_port + '</td>' +
                     '<td>' + lane.status + '</td>' +
                     '<td>' + lane.clients + '</td>' +
                     '<td class="' + occClass + '">' + lane.occupancy + '</td>' +

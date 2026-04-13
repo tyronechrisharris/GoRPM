@@ -5,14 +5,508 @@
     "Lanes": [
         {
             "LaneID": 1,
-            "LaneName": "Lane 1 (Local)",
+            "LaneName": "Lane 1",
             "Enabled": true,
-            "AutoGammaProbability": 0.25,
-            "AutoNeutronProbability": 0.10,
+            "AutoGammaProbability": 0.06,
+            "AutoNeutronProbability": 0.04,
+            "AutoInterval": 27,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10001,
+                "GammaBG": 225,
+                "NeutronBG": 1,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 2,
+            "LaneName": "Lane 2",
+            "Enabled": true,
+            "AutoGammaProbability": 0.19,
+            "AutoNeutronProbability": 0.06,
+            "AutoInterval": 42,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10002,
+                "GammaBG": 267,
+                "NeutronBG": 3,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 3,
+            "LaneName": "Lane 3",
+            "Enabled": true,
+            "AutoGammaProbability": 0.1,
+            "AutoNeutronProbability": 0.05,
+            "AutoInterval": 40,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10003,
+                "GammaBG": 293,
+                "NeutronBG": 1,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 4,
+            "LaneName": "Lane 4",
+            "Enabled": true,
+            "AutoGammaProbability": 0.14,
+            "AutoNeutronProbability": 0.1,
+            "AutoInterval": 21,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10004,
+                "GammaBG": 208,
+                "NeutronBG": 1,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 5,
+            "LaneName": "Lane 5",
+            "Enabled": true,
+            "AutoGammaProbability": 0.16,
+            "AutoNeutronProbability": 0.05,
+            "AutoInterval": 28,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10005,
+                "GammaBG": 290,
+                "NeutronBG": 2,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 6,
+            "LaneName": "Lane 6",
+            "Enabled": true,
+            "AutoGammaProbability": 0.05,
+            "AutoNeutronProbability": 0.09,
+            "AutoInterval": 34,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10006,
+                "GammaBG": 269,
+                "NeutronBG": 3,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 7,
+            "LaneName": "Lane 7",
+            "Enabled": true,
+            "AutoGammaProbability": 0.09,
+            "AutoNeutronProbability": 0.06,
+            "AutoInterval": 24,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10007,
+                "GammaBG": 201,
+                "NeutronBG": 3,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 8,
+            "LaneName": "Lane 8",
+            "Enabled": true,
+            "AutoGammaProbability": 0.09,
+            "AutoNeutronProbability": 0.03,
+            "AutoInterval": 26,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10008,
+                "GammaBG": 296,
+                "NeutronBG": 1,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 9,
+            "LaneName": "Lane 9",
+            "Enabled": true,
+            "AutoGammaProbability": 0.19,
+            "AutoNeutronProbability": 0.07,
+            "AutoInterval": 30,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10009,
+                "GammaBG": 263,
+                "NeutronBG": 2,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 10,
+            "LaneName": "Lane 10",
+            "Enabled": true,
+            "AutoGammaProbability": 0.12,
+            "AutoNeutronProbability": 0.05,
+            "AutoInterval": 24,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10010,
+                "GammaBG": 294,
+                "NeutronBG": 3,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 11,
+            "LaneName": "Lane 11",
+            "Enabled": true,
+            "AutoGammaProbability": 0.17,
+            "AutoNeutronProbability": 0.06,
+            "AutoInterval": 31,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10011,
+                "GammaBG": 253,
+                "NeutronBG": 2,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 12,
+            "LaneName": "Lane 12",
+            "Enabled": true,
+            "AutoGammaProbability": 0.14,
+            "AutoNeutronProbability": 0.05,
+            "AutoInterval": 30,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10012,
+                "GammaBG": 243,
+                "NeutronBG": 1,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 13,
+            "LaneName": "Lane 13",
+            "Enabled": true,
+            "AutoGammaProbability": 0.1,
+            "AutoNeutronProbability": 0.08,
+            "AutoInterval": 33,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10013,
+                "GammaBG": 232,
+                "NeutronBG": 2,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 14,
+            "LaneName": "Lane 14",
+            "Enabled": true,
+            "AutoGammaProbability": 0.2,
+            "AutoNeutronProbability": 0.07,
+            "AutoInterval": 37,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10014,
+                "GammaBG": 292,
+                "NeutronBG": 1,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 15,
+            "LaneName": "Lane 15",
+            "Enabled": true,
+            "AutoGammaProbability": 0.19,
+            "AutoNeutronProbability": 0.08,
+            "AutoInterval": 40,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10015,
+                "GammaBG": 255,
+                "NeutronBG": 3,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 16,
+            "LaneName": "Lane 16",
+            "Enabled": true,
+            "AutoGammaProbability": 0.06,
+            "AutoNeutronProbability": 0.08,
+            "AutoInterval": 33,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10016,
+                "GammaBG": 286,
+                "NeutronBG": 2,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 17,
+            "LaneName": "Lane 17",
+            "Enabled": true,
+            "AutoGammaProbability": 0.18,
+            "AutoNeutronProbability": 0.07,
             "AutoInterval": 45,
             "RPM": {
-                "IPAddr": "127.0.0.1",
-                "Port": 10001,
+                "IPAddr": "0.0.0.0",
+                "Port": 10017,
+                "GammaBG": 226,
+                "NeutronBG": 2,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 18,
+            "LaneName": "Lane 18",
+            "Enabled": true,
+            "AutoGammaProbability": 0.13,
+            "AutoNeutronProbability": 0.03,
+            "AutoInterval": 45,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10018,
+                "GammaBG": 279,
+                "NeutronBG": 3,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 19,
+            "LaneName": "Lane 19",
+            "Enabled": true,
+            "AutoGammaProbability": 0.17,
+            "AutoNeutronProbability": 0.09,
+            "AutoInterval": 24,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10019,
+                "GammaBG": 295,
+                "NeutronBG": 1,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 20,
+            "LaneName": "Lane 20",
+            "Enabled": true,
+            "AutoGammaProbability": 0.08,
+            "AutoNeutronProbability": 0.02,
+            "AutoInterval": 45,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10020,
+                "GammaBG": 224,
+                "NeutronBG": 4,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 21,
+            "LaneName": "Lane 21",
+            "Enabled": true,
+            "AutoGammaProbability": 0.11,
+            "AutoNeutronProbability": 0.1,
+            "AutoInterval": 29,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10021,
+                "GammaBG": 263,
+                "NeutronBG": 1,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 22,
+            "LaneName": "Lane 22",
+            "Enabled": true,
+            "AutoGammaProbability": 0.15,
+            "AutoNeutronProbability": 0.06,
+            "AutoInterval": 33,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10022,
+                "GammaBG": 287,
+                "NeutronBG": 3,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 23,
+            "LaneName": "Lane 23",
+            "Enabled": true,
+            "AutoGammaProbability": 0.17,
+            "AutoNeutronProbability": 0.06,
+            "AutoInterval": 43,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10023,
+                "GammaBG": 281,
+                "NeutronBG": 3,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 24,
+            "LaneName": "Lane 24",
+            "Enabled": true,
+            "AutoGammaProbability": 0.08,
+            "AutoNeutronProbability": 0.07,
+            "AutoInterval": 26,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10024,
+                "GammaBG": 210,
+                "NeutronBG": 4,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 25,
+            "LaneName": "Lane 25",
+            "Enabled": true,
+            "AutoGammaProbability": 0.13,
+            "AutoNeutronProbability": 0.07,
+            "AutoInterval": 41,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10025,
+                "GammaBG": 247,
+                "NeutronBG": 4,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 26,
+            "LaneName": "Lane 26",
+            "Enabled": true,
+            "AutoGammaProbability": 0.19,
+            "AutoNeutronProbability": 0.09,
+            "AutoInterval": 36,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10026,
+                "GammaBG": 224,
+                "NeutronBG": 2,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 27,
+            "LaneName": "Lane 27",
+            "Enabled": true,
+            "AutoGammaProbability": 0.2,
+            "AutoNeutronProbability": 0.03,
+            "AutoInterval": 42,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10027,
                 "GammaBG": 250,
                 "NeutronBG": 2,
                 "GammaNSigma": 6,
@@ -23,22 +517,440 @@
             }
         },
         {
-            "LaneID": 2,
-            "LaneName": "Lane 2 (Remote)",
+            "LaneID": 28,
+            "LaneName": "Lane 28",
             "Enabled": true,
-            "AutoGammaProbability": 0.05,
-            "AutoNeutronProbability": 0.05,
-            "AutoInterval": 60,
+            "AutoGammaProbability": 0.08,
+            "AutoNeutronProbability": 0.04,
+            "AutoInterval": 25,
             "RPM": {
                 "IPAddr": "0.0.0.0",
-                "Port": 10002,
-                "GammaBG": 220,
+                "Port": 10028,
+                "GammaBG": 229,
+                "NeutronBG": 4,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 29,
+            "LaneName": "Lane 29",
+            "Enabled": true,
+            "AutoGammaProbability": 0.2,
+            "AutoNeutronProbability": 0.09,
+            "AutoInterval": 31,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10029,
+                "GammaBG": 256,
+                "NeutronBG": 4,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 30,
+            "LaneName": "Lane 30",
+            "Enabled": true,
+            "AutoGammaProbability": 0.19,
+            "AutoNeutronProbability": 0.1,
+            "AutoInterval": 38,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10030,
+                "GammaBG": 233,
+                "NeutronBG": 2,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 31,
+            "LaneName": "Lane 31",
+            "Enabled": true,
+            "AutoGammaProbability": 0.18,
+            "AutoNeutronProbability": 0.08,
+            "AutoInterval": 25,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10031,
+                "GammaBG": 234,
+                "NeutronBG": 1,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 32,
+            "LaneName": "Lane 32",
+            "Enabled": true,
+            "AutoGammaProbability": 0.2,
+            "AutoNeutronProbability": 0.08,
+            "AutoInterval": 23,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10032,
+                "GammaBG": 272,
+                "NeutronBG": 1,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 33,
+            "LaneName": "Lane 33",
+            "Enabled": true,
+            "AutoGammaProbability": 0.08,
+            "AutoNeutronProbability": 0.08,
+            "AutoInterval": 25,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10033,
+                "GammaBG": 291,
+                "NeutronBG": 4,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 34,
+            "LaneName": "Lane 34",
+            "Enabled": true,
+            "AutoGammaProbability": 0.14,
+            "AutoNeutronProbability": 0.08,
+            "AutoInterval": 34,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10034,
+                "GammaBG": 212,
+                "NeutronBG": 4,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 35,
+            "LaneName": "Lane 35",
+            "Enabled": true,
+            "AutoGammaProbability": 0.13,
+            "AutoNeutronProbability": 0.06,
+            "AutoInterval": 37,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10035,
+                "GammaBG": 289,
                 "NeutronBG": 3,
-                "GammaNSigma": 5,
-                "NeutronThreshold": 6,
-                "GHThreshold": 400,
-                "GLThreshold": 100,
-                "NHThreshold": 12
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 36,
+            "LaneName": "Lane 36",
+            "Enabled": true,
+            "AutoGammaProbability": 0.13,
+            "AutoNeutronProbability": 0.03,
+            "AutoInterval": 36,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10036,
+                "GammaBG": 290,
+                "NeutronBG": 1,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 37,
+            "LaneName": "Lane 37",
+            "Enabled": true,
+            "AutoGammaProbability": 0.17,
+            "AutoNeutronProbability": 0.1,
+            "AutoInterval": 37,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10037,
+                "GammaBG": 227,
+                "NeutronBG": 1,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 38,
+            "LaneName": "Lane 38",
+            "Enabled": true,
+            "AutoGammaProbability": 0.15,
+            "AutoNeutronProbability": 0.08,
+            "AutoInterval": 44,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10038,
+                "GammaBG": 254,
+                "NeutronBG": 3,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 39,
+            "LaneName": "Lane 39",
+            "Enabled": true,
+            "AutoGammaProbability": 0.07,
+            "AutoNeutronProbability": 0.1,
+            "AutoInterval": 44,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10039,
+                "GammaBG": 288,
+                "NeutronBG": 3,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 40,
+            "LaneName": "Lane 40",
+            "Enabled": true,
+            "AutoGammaProbability": 0.15,
+            "AutoNeutronProbability": 0.05,
+            "AutoInterval": 42,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10040,
+                "GammaBG": 230,
+                "NeutronBG": 4,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 41,
+            "LaneName": "Lane 41",
+            "Enabled": true,
+            "AutoGammaProbability": 0.19,
+            "AutoNeutronProbability": 0.05,
+            "AutoInterval": 28,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10041,
+                "GammaBG": 290,
+                "NeutronBG": 1,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 42,
+            "LaneName": "Lane 42",
+            "Enabled": true,
+            "AutoGammaProbability": 0.14,
+            "AutoNeutronProbability": 0.08,
+            "AutoInterval": 33,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10042,
+                "GammaBG": 231,
+                "NeutronBG": 4,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 43,
+            "LaneName": "Lane 43",
+            "Enabled": true,
+            "AutoGammaProbability": 0.14,
+            "AutoNeutronProbability": 0.04,
+            "AutoInterval": 34,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10043,
+                "GammaBG": 209,
+                "NeutronBG": 1,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 44,
+            "LaneName": "Lane 44",
+            "Enabled": true,
+            "AutoGammaProbability": 0.09,
+            "AutoNeutronProbability": 0.05,
+            "AutoInterval": 30,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10044,
+                "GammaBG": 240,
+                "NeutronBG": 1,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 45,
+            "LaneName": "Lane 45",
+            "Enabled": true,
+            "AutoGammaProbability": 0.18,
+            "AutoNeutronProbability": 0.05,
+            "AutoInterval": 44,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10045,
+                "GammaBG": 249,
+                "NeutronBG": 3,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 46,
+            "LaneName": "Lane 46",
+            "Enabled": true,
+            "AutoGammaProbability": 0.17,
+            "AutoNeutronProbability": 0.05,
+            "AutoInterval": 40,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10046,
+                "GammaBG": 237,
+                "NeutronBG": 1,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 47,
+            "LaneName": "Lane 47",
+            "Enabled": true,
+            "AutoGammaProbability": 0.08,
+            "AutoNeutronProbability": 0.08,
+            "AutoInterval": 21,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10047,
+                "GammaBG": 294,
+                "NeutronBG": 1,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 48,
+            "LaneName": "Lane 48",
+            "Enabled": true,
+            "AutoGammaProbability": 0.09,
+            "AutoNeutronProbability": 0.02,
+            "AutoInterval": 43,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10048,
+                "GammaBG": 284,
+                "NeutronBG": 4,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 49,
+            "LaneName": "Lane 49",
+            "Enabled": true,
+            "AutoGammaProbability": 0.17,
+            "AutoNeutronProbability": 0.05,
+            "AutoInterval": 35,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10049,
+                "GammaBG": 223,
+                "NeutronBG": 1,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
+            }
+        },
+        {
+            "LaneID": 50,
+            "LaneName": "Lane 50",
+            "Enabled": true,
+            "AutoGammaProbability": 0.17,
+            "AutoNeutronProbability": 0.03,
+            "AutoInterval": 36,
+            "RPM": {
+                "IPAddr": "0.0.0.0",
+                "Port": 10050,
+                "GammaBG": 226,
+                "NeutronBG": 2,
+                "GammaNSigma": 6,
+                "NeutronThreshold": 5,
+                "GHThreshold": 450,
+                "GLThreshold": 80,
+                "NHThreshold": 10
             }
         }
     ]
