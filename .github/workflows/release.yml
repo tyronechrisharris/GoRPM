@@ -40,6 +40,10 @@ jobs:
         run: |
           GOOS=linux GOARCH=386 CGO_ENABLED=0 go build -ldflags="-s -w" -o dist/gorpm-linux-x86 .
 
+      - name: Build Linux (arm64)
+        run: |
+          GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -ldflags="-s -w" -o dist/gorpm-linux-arm64 .
+
       - name: Generate Release Notes
         id: release_notes
         env:
