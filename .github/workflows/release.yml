@@ -40,6 +40,14 @@ jobs:
         run: |
           GOOS=linux GOARCH=386 CGO_ENABLED=0 go build -ldflags="-s -w" -o dist/gorpm-linux-x86 .
 
+      - name: Build Raspberry Pi 4 (Linux arm64 / 64-bit OS)
+        run: |
+          GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -ldflags="-s -w" -o dist/gorpm-linux-arm64 .
+
+      - name: Build Raspberry Pi 4 (Linux armv7 / 32-bit OS)
+        run: |
+          GOOS=linux GOARCH=arm GOARM=7 CGO_ENABLED=0 go build -ldflags="-s -w" -o dist/gorpm-linux-armv7 .
+
       - name: Generate Release Notes
         id: release_notes
         env:
